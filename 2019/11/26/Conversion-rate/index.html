@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Conversion rate - Gilmore&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+
+
+    <meta name="keywords" content="Case Study">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Conversion rate">
+<meta property="og:url" content="http://yoursite.com/2019/11/26/Conversion-rate/index.html">
+<meta property="og:site_name" content="Gilmore&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/11/26/Conversion-rate/7.jpg">
+<meta property="og:updated_time" content="2019-11-28T16:29:49.335Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Conversion rate">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/26/Conversion-rate/7.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-dune-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archives</a>
+            
+            <a class="navbar-item " href="/categories/LifeStyle">Lifestyle</a>
+            
+            <a class="navbar-item " href="/categories/Interviews">Interviews</a>
+            
+            <a class="navbar-item " href="/categories/Projects">Projects</a>
+            
+            <a class="navbar-item " href="/categories/Learning">Learning</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Challenge-Description">1&nbsp;&nbsp;<b>Challenge Description</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#What-I-have-learned">2&nbsp;&nbsp;<b>What I have learned</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Load-and-Inspect-Data">3&nbsp;&nbsp;<b>Load and Inspect Data</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Handle-Age-Outliers">3.1&nbsp;&nbsp;Handle Age Outliers</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Inspect-Country’s-distribution-and-its-relationship-with-conversion">3.2&nbsp;&nbsp;Inspect Country’s distribution and its relationship with conversion</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Inspect-Age’s-distribution-and-its-relationship-with-conversion">3.3&nbsp;&nbsp;Inspect Age’s distribution and its relationship with conversion</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Data-Preprocessing">4&nbsp;&nbsp;<b>Data Preprocessing</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Categorical-values">4.1&nbsp;&nbsp;Categorical values</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Imbalanced-class">4.2&nbsp;&nbsp;Imbalanced class</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Classify-via-Logistic-Regression">4.3&nbsp;&nbsp;Classify via Logistic Regression</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Conclusions-and-Suggestions">5&nbsp;&nbsp;<b>Conclusions and Suggestions</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/Gilemore">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Conversion rate
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-11-26T15:18:45.000Z" itemprop="datePublished">Nov 26 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Interviews/">Interviews</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 minutes read (About 1009 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="/2019/11/26/Conversion-rate/7.jpg" alt></p>
+<a id="more"></a>
+
+<p>The goal of this challenge is to build a model that predicts conversion rate and, based on the model, come up with ideas to improve revenue.</p>
+<h1 id="Challenge-Description"><a href="#Challenge-Description" class="headerlink" title="Challenge Description"></a>Challenge Description</h1><p>We have data about users who hit our site: whether they converted or not as well as some of their characteristics such as their country, the marketing channel, their age, whether they are repeat users and the number of pages visited during that session.</p>
+<p>The goal is to </p>
+<ul>
+<li>Predict conversion rate</li>
+<li>Come up with recommendations for the product team and the marketing team to improve conversion rate</li>
+</ul>
+<h1 id="What-I-have-learned"><a href="#What-I-have-learned" class="headerlink" title="What I have learned"></a>What I have learned</h1><ul>
+<li>data preprocessing<ul>
+<li>categorical values turn into numerical values (One-Hot-Encoding)</li>
+<li>numerical value distribution, including response variable!! if some kind of imbalanced, then try other metrics like precision and recall.</li>
+</ul>
+</li>
+<li>Detailed suggestion</li>
+</ul>
+<h1 id="Load-and-Inspect-Data"><a href="#Load-and-Inspect-Data" class="headerlink" title="Load and Inspect Data"></a>Load and Inspect Data</h1><p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd</span><br><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.style.use(<span class="hljs-string">"ggplot"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>DataFrame:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>country</td>
+<td>UK</td>
+<td>the user is based in the UK</td>
+</tr>
+<tr>
+<td>age</td>
+<td>25</td>
+<td>25 years old</td>
+</tr>
+<tr>
+<td>New_user</td>
+<td>1</td>
+<td>She created her account during this session</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Ads</td>
+<td>she came to the site by clicking on an ad</td>
+</tr>
+<tr>
+<td>Total_pages_visited</td>
+<td>1</td>
+<td>she visited just 1 page during that session</td>
+</tr>
+<tr>
+<td>converted</td>
+<td>0</td>
+<td>this user did not buy during this session.</td>
+</tr>
+</tbody></table>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">inputfilename=<span class="hljs-string">"conversion_data.csv"</span></span><br><span class="line">df=pd.read_cs (inputfilename)</span><br><span class="line">df.describe() <span class="hljs-comment"># glance the data</span></span><br></pre></td></tr></table></figure></p>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>new_user</th>
+      <th>total_pages_visited</th>
+      <th>converted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>316200.000000</td>
+      <td>316200.000000</td>
+      <td>316200.000000</td>
+      <td>316200.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>30.569858</td>
+      <td>0.685465</td>
+      <td>4.872966</td>
+      <td>0.032258</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>8.271802</td>
+      <td>0.464331</td>
+      <td>3.341104</td>
+      <td>0.176685</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>17.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>24.000000</td>
+      <td>0.000000</td>
+      <td>2.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>30.000000</td>
+      <td>1.000000</td>
+      <td>4.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>36.000000</td>
+      <td>1.000000</td>
+      <td>7.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>123.000000</td>
+      <td>1.000000</td>
+      <td>29.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="Handle-Age-Outliers"><a href="#Handle-Age-Outliers" class="headerlink" title="Handle Age Outliers"></a>Handle Age Outliers</h2><p>From the table above, we can see that age has max=123, which is abnormal so we will delete those who are older than 100.</p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.loc[df.age&gt;=<span class="hljs-number">100</span>,:]</span><br></pre></td></tr></table></figure></p>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>age</th>
+      <th>new_user</th>
+      <th>source</th>
+      <th>total_pages_visited</th>
+      <th>converted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>90928</th>
+      <td>Germany</td>
+      <td>123</td>
+      <td>0</td>
+      <td>Seo</td>
+      <td>15</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>295581</th>
+      <td>UK</td>
+      <td>111</td>
+      <td>0</td>
+      <td>Ads</td>
+      <td>10</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.age[df.age&lt;<span class="hljs-number">100</span>].describe()</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">count    316198.000000</span><br><span class="line">mean         30.569311</span><br><span class="line">std           8.268958</span><br><span class="line">min          17.000000</span><br><span class="line">25%          24.000000</span><br><span class="line">50%          30.000000</span><br><span class="line">75%          36.000000</span><br><span class="line">max          79.000000</span><br><span class="line">Name: age, dtype: float64</span><br></pre></td></tr></table></figure></p>
+<p>we can see, that, min=17, max=79, which makes sense, since we have 310000 samples, just two outliers won’t have too much effect, so we can just delete them.</p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df=df.loc[df.age&lt;<span class="hljs-number">100</span>]</span><br></pre></td></tr></table></figure></p>
+<p>Other data are good to go so we start to analyze some charachteristics.</p>
+<h2 id="Inspect-Country’s-distribution-and-its-relationship-with-conversion"><a href="#Inspect-Country’s-distribution-and-its-relationship-with-conversion" class="headerlink" title="Inspect Country’s distribution and its relationship with conversion"></a>Inspect Country’s distribution and its relationship with conversion</h2><p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">country_dist=df.country.value_counts()</span><br><span class="line">country_dist.plot(kine=<span class="hljs-string">"bar"</span>)</span><br><span class="line">convert_by_country_dist=df.groupby(<span class="hljs-string">"country"</span>)[<span class="hljs-string">"converted"</span>].mean()</span><br><span class="line">convert_by_country_dist</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">country</span><br><span class="line">China      0.001332</span><br><span class="line">Germany    0.062428</span><br><span class="line">UK         0.052612</span><br><span class="line">US         0.037801</span><br><span class="line">Name: converted, dtype: float64</span><br></pre></td></tr></table></figure></p>
+<p>we can see that:</p>
+<ul>
+<li>There are lots of users from China, but the conversion rate is lowest</li>
+<li>Conversion rate in German is very high, but there are not a lot of users from German</li>
+</ul>
+<h2 id="Inspect-Age’s-distribution-and-its-relationship-with-conversion"><a href="#Inspect-Age’s-distribution-and-its-relationship-with-conversion" class="headerlink" title="Inspect Age’s distribution and its relationship with conversion"></a>Inspect Age’s distribution and its relationship with conversion</h2><p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(df.age,df.converted)</span><br></pre></td></tr></table></figure></p>
+<p>We can see that there is nearly no”conversion” from users which are older than 60.</p>
+<h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><h2 id="Categorical-values"><a href="#Categorical-values" class="headerlink" title="Categorical values"></a>Categorical values</h2><p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure></p>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>age</th>
+      <th>new_user</th>
+      <th>source</th>
+      <th>total_pages_visited</th>
+      <th>converted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>UK</td>
+      <td>25</td>
+      <td>1</td>
+      <td>Ads</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>US</td>
+      <td>23</td>
+      <td>1</td>
+      <td>Seo</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>US</td>
+      <td>28</td>
+      <td>1</td>
+      <td>Seo</td>
+      <td>4</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>China</td>
+      <td>39</td>
+      <td>1</td>
+      <td>Seo</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>US</td>
+      <td>30</td>
+      <td>1</td>
+      <td>Seo</td>
+      <td>6</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>From the model, we need to convert source  and country into numerical values. Here we use <em>One-Hot-Encoding</em>.</p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X=df.loc[:,(<span class="hljs-string">"country"</span>,<span class="hljs-string">"age"</span>,<span class="hljs-string">"new_user"</span>,<span class="hljs-string">"source"</span>,<span class="hljs-string">"total_pages_visited"</span>)]</span><br><span class="line">X=pd.get_dummies(X)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Imbalanced-class"><a href="#Imbalanced-class" class="headerlink" title="Imbalanced class"></a>Imbalanced class</h2><p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y=df.converted</span><br><span class="line">y.mean()</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.03225194340255157</span><br></pre></td></tr></table></figure></p>
+<p>Here we can see that target value is very imbalanced, which reminds us should not use plain “accuracy” as the metric to judge a classifier is good or not.</p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split</span><br><span class="line">Xtrain, Xtest, ytrain,ytest=train_test_split(X,y,test_size=<span class="hljs-number">0.3</span>)</span><br><span class="line">ytrain.mean(),ytest.mean()</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(0.0320287903501119, 0.032698919216669516)</span><br></pre></td></tr></table></figure></p>
+<p>Since both means are similar to the whole mean, we can say that the splitting process doesn’t import any bias.</p>
+<h2 id="Classify-via-Logistic-Regression"><a href="#Classify-via-Logistic-Regression" class="headerlink" title="Classify via Logistic Regression"></a>Classify via Logistic Regression</h2><p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LogisticRegressionCV</span><br><span class="line"><span class="hljs-keyword">from</span> sklearn.grid_search <span class="hljs-keyword">import</span> GridSearchCV</span><br><span class="line"><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> classification_report,confusion_matrix</span><br><span class="line">lrcv=LogisticRegressionCV(Cs=np.logspace(<span class="hljs-number">-3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">7</span>),dual=<span class="hljs-literal">False</span>,scoring=<span class="hljs-string">"roc_auc"</span>,max_iter=<span class="hljs-number">1000</span>,n_jobs=<span class="hljs-number">-1</span>,verbose=<span class="hljs-number">1</span>)</span><br><span class="line">lrcv.fit(Xtrain,ytrain)</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ytest_predict=lrcv.predict(Xtest)</span><br><span class="line">print(classificatio_report(ytrue=ytest,ytest_predict))</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">             precision    recall  f1-score   support</span><br><span class="line"></span><br><span class="line">          0       0.99      1.00      0.99    101851</span><br><span class="line">          1       0.85      0.68      0.76      3443</span><br><span class="line"></span><br><span class="line">avg / total       0.98      0.99      0.98    105294</span><br></pre></td></tr></table></figure></p>
+<p>If we use the default cutoff 0.5, we can see a high precision (0.85) and a not very good recall 0.68, which means that we classify 32% converted user as non-converted. </p>
+<p>Since our task is giving Sales team and Marketing team some insights, so we don’t need to tune the cutoff value now, since that won’t affect the model. However, if, for example, if we <strong>care more about not losing a valued customer</strong>, so incorrectly classifying a converted user as non-converted will pay much, then we need to lower down the cut-off probability to be 1, which will increase the recall with the price lower than precision.</p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">feat_importance=pd.DataFrame(&#123;<span class="hljs-string">"name"</span>:Xtrain.columns,<span class="hljs-string">"coef"</span>:lrcv.coef_[<span class="hljs-number">0</span>]&#125;)</span><br><span class="line">feat_importance=feat_importances[[<span class="hljs-string">"name"</span>,<span class="hljs-string">"coef"</span>]]</span><br><span class="line">feat_importance[<span class="hljs-string">"importances"</span>]=np.abs(feat_importance[<span class="hljs-string">"coef"</span>])</span><br><span class="line">feat_importance.sort_values(by=<span class="hljs-string">"importances"</span>,inplace=<span class="hljs-literal">True</span>,ascending=<span class="hljs-literal">False</span>)</span><br><span class="line">feat_importance</span><br></pre></td></tr></table></figure></p>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>coef</th>
+      <th>importances</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>country_China</td>
+      <td>-2.743028</td>
+      <td>2.743028</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>new_user</td>
+      <td>-1.753867</td>
+      <td>1.753867</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>country_Germany</td>
+      <td>1.135605</td>
+      <td>1.135605</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>country_UK</td>
+      <td>0.950535</td>
+      <td>0.950535</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>total_pages_visited</td>
+      <td>0.766292</td>
+      <td>0.766292</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>country_US</td>
+      <td>0.564841</td>
+      <td>0.564841</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>source_Direct</td>
+      <td>-0.134776</td>
+      <td>0.134776</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>age</td>
+      <td>-0.075693</td>
+      <td>0.075693</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>source_Ads</td>
+      <td>0.034823</td>
+      <td>0.034823</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>source_Seo</td>
+      <td>0.007905</td>
+      <td>0.007905</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h1 id="Conclusions-and-Suggestions"><a href="#Conclusions-and-Suggestions" class="headerlink" title="Conclusions and Suggestions"></a>Conclusions and Suggestions</h1><ul>
+<li>Conversion among China users are very bad. We can see that there are lots of users coming from China, but their conversion rate is very low. Considering the huge market in China, we should try to improve conversion rate in China. We can consider <strong><em>whether our website has good Chinese translation</em></strong> and <strong><em>satisfy Chinese users’ culture requirement.</em></strong></li>
+<li>Conversion from German is great. But there aren’t lots of users from German. We can try some stratgies to attract German users like <strong><em>more advertisements</em></strong>.</li>
+<li>Old users have better conversion rate. So we should keep in touch with them, e.g. <strong><em>send promotion email or coupons to old users</em></strong>.</li>
+<li>Age is a negative factor. the older the user is, the less likely he/she will convert. Then we should find the reason behind it.</li>
+<li>Total page visited is a positive factor. the longer the user browse our web page, the more likely he/she will convert and buy something. Then if we find some user browse a lot and didn’t buy anything, we can send email to remind them.</li>
+</ul>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Case-Study/">#Case Study</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/11/26/Tree/">Tree</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/11/26/linear-regression/">Assumptions about linear regression</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Haoxue Li&nbsp;
+                ONLY SINGLE ONE IN NYC: <a href="https://github.com/Gilemore">Gilemore</a>
+      
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

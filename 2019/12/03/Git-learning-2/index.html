@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Git learning (2) - Gilmore&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+
+
+    <meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git learning (2)">
+<meta property="og:url" content="http://yoursite.com/2019/12/03/Git-learning-2/index.html">
+<meta property="og:site_name" content="Gilmore&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning-2/14.png">
+<meta property="og:updated_time" content="2019-12-10T00:28:23.340Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git learning (2)">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/03/Git-learning-2/1.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-dune-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archives</a>
+            
+            <a class="navbar-item " href="/categories/LifeStyle">Lifestyle</a>
+            
+            <a class="navbar-item " href="/categories/Interviews">Interviews</a>
+            
+            <a class="navbar-item " href="/categories/Projects">Projects</a>
+            
+            <a class="navbar-item " href="/categories/Learning">Learning</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Recap">1&nbsp;&nbsp;<b>Recap</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Branches-in-a-Nutshell">2&nbsp;&nbsp;<b>Branches in a Nutshell </b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Branches-in-a-Nutshell-1">2.1&nbsp;&nbsp;Branches in a Nutshell </a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Creating-a-New-Branch">2.1.1&nbsp;&nbsp;Creating a New Branch</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Switching-Branches">2.1.2&nbsp;&nbsp;Switching Branches</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Basic-Branching-and-Merging">3&nbsp;&nbsp;<b>Basic Branching and Merging</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Basic-Branching">3.1&nbsp;&nbsp;Basic Branching</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Basic-Merging">3.2&nbsp;&nbsp;Basic Merging</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Basic-Merge-Conflicts">3.2.1&nbsp;&nbsp;Basic Merge Conflicts</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Branch-Management">4&nbsp;&nbsp;<b>Branch Management</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Branching-Workflows">5&nbsp;&nbsp;<b>Branching Workflows</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Long-Running-Branches">5.1&nbsp;&nbsp;Long-Running Branches</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Topic-Branches">5.2&nbsp;&nbsp;Topic Branches</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Remote-Branches">6&nbsp;&nbsp;<b>Remote Branches</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Remote-Branches-1">6.1&nbsp;&nbsp;Remote Branches</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Pushing">6.2&nbsp;&nbsp;Pushing</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Tracking-Branches">6.3&nbsp;&nbsp;Tracking Branches</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Pulling">6.4&nbsp;&nbsp;Pulling</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Deleting-Remote-Branches">6.5&nbsp;&nbsp;Deleting Remote Branches</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Rebasing">7&nbsp;&nbsp;<b>Rebasing</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#The-Basic-Rebase">7.1&nbsp;&nbsp;The Basic Rebase</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#More-Interesting-Rebases">7.2&nbsp;&nbsp;More Interesting Rebases</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/Gilemore">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Git learning (2)
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-12-03T17:52:48.000Z" itemprop="datePublished">Dec 3 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Projects/">Projects</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 minutes read (About 1489 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <img src="/2019/12/03/Git-learning-2/1.jpg" alt="drawing" width="700" class="center">
+
+<a id="more"></a>
+
+<h1 id="Recap"><a href="#Recap" class="headerlink" title="Recap"></a>Recap</h1><ul>
+<li>Git Branch Basics<ul>
+<li>git branch</li>
+<li>git checkout master</li>
+<li>Git merge new</li>
+<li>git fetch</li>
+<li>git pull=git fetch+git merge</li>
+<li>git rebase master</li>
+</ul>
+</li>
+</ul>
+<h1 id="Branches-in-a-Nutshell"><a href="#Branches-in-a-Nutshell" class="headerlink" title="Branches in a Nutshell "></a><span style="color:INDIANRED; font-family: Goeriga">Branches in a Nutshell </span></h1><p>Branching means you diverge from the main line of development and continue to do work without messing with that main line. In many VCS tools, this is expensive process, requiring you to create a new copy of your source code directory. </p>
+<p>But!!:laughing: The way Git branches is <span style="color:LIGHTCORAL; font-family: Comic Sans MS">lightweight</span>, making branching operations nearly instantaneous, and switching back and forth between branches generally just as fast.</p>
+<h2 id="Branches-in-a-Nutshell-1"><a href="#Branches-in-a-Nutshell-1" class="headerlink" title="Branches in a Nutshell "></a><span style="color:INDIANRED; font-family: Comic Sans MS">Branches in a Nutshell </span></h2><p>When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged. This object also contains the author’s name and email address, the message that you typed, and pointers to the commit or commits that directly came before this commit (its parent or parents): zero parents for the initial commit, one parent for a normal commit, and multiple parents for a commit that results from a merge of two or more branches.</p>
+<p>When you create the commit by running <code>git commit</code>, Git checksums each subdirectory and stores them as a tree object in the Git repository.</p>
+<img src="/2019/12/03/Git-learning-2/2.png" alt="drawing" width="700" class="center">
+
+<p>Git repository above contains 5 objects: three <strong>blobs</strong> (each representing the contents of one of the three files), one <strong>tree</strong> that lists the contents of the directory and specifies which file names are stored as which blobs, and one commit with the pointer to that root tree and all the commit metadata.</p>
+<img src="/2019/12/03/Git-learning-2/3.png" alt="drawing" width="700" class="center">
+
+<p>If you make some changes and commit again, the next commit stores a pointer to the commit that came immediately before it. </p>
+<p>A branch in git is a lightweight movable pointer to one of these commit. The default branch name in Git is <code>master</code>.</p>
+<h3 id="Creating-a-New-Branch"><a href="#Creating-a-New-Branch" class="headerlink" title="Creating a New Branch"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Creating a New Branch</span></h3><p>When you create a new branch, you create a new pointer for you to move around.</p>
+<p><code>git branch testing</code></p>
+<p>This command creates a new branch but it does not switch to that branch.</p>
+<h3 id="Switching-Branches"><a href="#Switching-Branches" class="headerlink" title="Switching Branches"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Switching Branches</span></h3><p><code>git checkout testing</code></p>
+<p>Git has a special poiner call <code>HEAD</code> to know what branch you’re currently on.</p>
+<p><code>git checkout master</code></p>
+<p>This command: moves the HEAD pointer back to the <code>master</code> branch, and it<span style="color:LIGHTCORAL; font-family: Comic Sans MS"> reverted the files</span> in your working directory back to the snapshot that <code>master</code> points to.</p>
+<h1 id="Basic-Branching-and-Merging"><a href="#Basic-Branching-and-Merging" class="headerlink" title="Basic Branching and Merging"></a><span style="color:INDIANRED; font-family: Goeriga">Basic Branching and Merging</span></h1><h2 id="Basic-Branching"><a href="#Basic-Branching" class="headerlink" title="Basic Branching"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Basic Branching</span></h2><p>Now for example, you want to create a new branch and switch to it at the same time:</p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b iss53</span><br></pre></td></tr></table></figure></p>
+<img src="/2019/12/03/Git-learning-2/4.png" alt="drawing" width="700" class="center">
+
+<p>You work on your website and do some commits. Doing so moves the iss53 branch forward:</p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim index.html</span><br><span class="line">git commit -a -m &apos;added a new footer&apos;</span><br></pre></td></tr></table></figure></p>
+<img src="/2019/12/03/Git-learning-2/5.png" alt="drawing" width="700" class="center">
+
+<p>Now you want to switch back to your master branch. before you do that, note that if your working directory or staging area has uncommited changes that conflict with the branch you’re checking out, Git won’t let you switch branches.  It’s best to have a clean working state when you switch branches.</p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b hotfix</span><br><span class="line">$ git checkout master</span><br><span class="line">$ git merge hotfix</span><br><span class="line">$ git branch -d hotfix</span><br><span class="line">(delete branch hotfix)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Basic-Merging"><a href="#Basic-Merging" class="headerlink" title="Basic Merging"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Basic Merging</span></h2><p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">$ git merge iss53</span><br></pre></td></tr></table></figure></p>
+<p>In this case, your development history has diverged from some order point. Because the commit on the branch you’re on isn’t a direct ancestor of the branch you’re merging in, Git has to do some work. In this following case, Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two.</p>
+<p>But instead of just moving the branch pointer forward, Git creates a new snapshot that results from this three-way merge and automatically creates a new commit that points to iut. This is referred as a merge commit, and is special in that <span style="color:LIGHTCORAL; font-family: Comic Sans MS">it has more than one parent.</span> </p>
+<img src="/2019/12/03/Git-learning-2/6.png" alt="drawing" width="700" class="center">
+
+<img src="/2019/12/03/Git-learning-2/7.png" alt="drawing" width="700" class="center">
+
+<h3 id="Basic-Merge-Conflicts"><a href="#Basic-Merge-Conflicts" class="headerlink" title="Basic Merge Conflicts"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Basic Merge Conflicts</span></h3><p>If you changed the same part of the same file differently in the two branches you’re merging, the automatic merge will fail.</p>
+<h1 id="Branch-Management"><a href="#Branch-Management" class="headerlink" title="Branch Management"></a><span style="color:INDIANRED; font-family: Goeriga">Branch Management</span></h1><p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git branch</span><br><span class="line">	iss53</span><br><span class="line">* master</span><br><span class="line">	testing</span><br></pre></td></tr></table></figure></p>
+<p>with <code>*</code> it means that the branch that you currently have checked out. </p>
+<h1 id="Branching-Workflows"><a href="#Branching-Workflows" class="headerlink" title="Branching Workflows"></a><span style="color:INDIANRED; font-family: Goeriga">Branching Workflows</span></h1><h2 id="Long-Running-Branches"><a href="#Long-Running-Branches" class="headerlink" title="Long-Running Branches"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Long-Running Branches</span></h2><p>Because Git users a simple three-way merge, merging from one branch into another multiple times over a long period is generally easy to do.</p>
+<p>Many Git developers have a workflow that embraces this approach, such as having only code that is entirely stable in their <code>master</code>– possible only code that has been or will be released. They have another parallel branch named <code>developed</code> or <code>next</code> that they work from or use to test stability–it isn’t necessarily always stable, but whenever it gets to a stable state, it can be merged into <code>master</code>.</p>
+<img src="/2019/12/03/Git-learning-2/8.png" alt="drawing" width="700" class="center">
+
+<h2 id="Topic-Branches"><a href="#Topic-Branches" class="headerlink" title="Topic Branches"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Topic Branches</span></h2><p>A topic branch is a short-lived branch that you create and use for a single particular feature or related work.</p>
+<h1 id="Remote-Branches"><a href="#Remote-Branches" class="headerlink" title="Remote Branches"></a><span style="color:INDIANRED; font-family: Goeriga">Remote Branches</span></h1><h2 id="Remote-Branches-1"><a href="#Remote-Branches-1" class="headerlink" title="Remote Branches"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Remote Branches</span></h2><p>Remote-tracking branches are references to the state of remote branches. They’re local references that you can’t move. Git moves them for you whenever you do any network communication, to make sure they accurately represent the state of the remote repository.</p>
+<p>Let’s say you have a Git server on your network at <code>git.ourcompany.com</code>. If you clone from this, Git’s <code>clone</code> command automatically names it <code>origin</code> for you, pulls down all its data, creates a pointer to where its <code>master</code> branch is, and names it <code>origin/master</code> locally.</p>
+<img src="/2019/12/03/Git-learning-2/9.png" alt="drawing" width="700" class="center">
+
+<p>if you do some work on your local  <code>master</code> branch, and, in the meantime, someone else pushes to <code>git.ourcompany.com</code> and updates its <code>master</code> branch, then your histories move forward differently.</p>
+<img src="/2019/12/03/Git-learning-2/10.png" alt="drawing" width="700" class="center">
+
+<p>To synchronize your work with a given remote, you run a <code>git fetch &lt;remote&gt;</code> command. This command looks up which server “origin” is (in this case, it’s <code>git.ourcompany.com</code>), fetches any data from it that you don’t yet have, and updates your local database, moving your <code>origin/master</code> pointer to its new, more up-to-date position;</p>
+<p>Noted that when you do a fetch that brings down new remote-tracking branches, you don’t automatically have local, editable copies of them. You don’t have a new <code>serverfix</code> branch – you only have an <code>origin/serverfix</code> pointer that you can’t modify.</p>
+<h2 id="Pushing"><a href="#Pushing" class="headerlink" title="Pushing"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Pushing</span></h2><p>When you want to share a branch with the world, you need to push it up to a remote to which you have write access. Your local branches aren’t automatically synchronized to the remotes you write to – you have to explicitly push the branches you want to share.</p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin serverfix</span><br></pre></td></tr></table></figure></p>
+<p>Git actually expands the <code>serverfix</code> branchname out to <code>refs/heads/serverfix:refs/heads/serverfix</code>, which means, “Take my serverfix local branch and push it to update the remote’s serverfix branch.”</p>
+<h2 id="Tracking-Branches"><a href="#Tracking-Branches" class="headerlink" title="Tracking Branches"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Tracking Branches</span></h2><p>Checking out a local branch from a remote-tracking branch automatically creates what is called a “tracking branch” ( and the branch it tracks is called an “upstream branch”). <span style="color:LIGHTCORAL; font-family: Comic Sans MS">Tracking branches are local branches that have a direct relationship to a remote branch.</span> If you’re on a tracking branch and type <code>git pull</code>, Git automatically knows which server to fetch from and which branch to merge in. </p>
+<p>When you clone a repository, it generally automatically creates a <code>master</code> branch that tracks <code>origin/master</code>. However, you can set up other tracking branches if you wish – ones that track branches on other remotes, or don’t track the <code>master</code> branch. </p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout --track origin/serverfix</span><br><span class="line">(branch serverfix set up to track remote branch serverfix from origin)</span><br><span class="line">(switched to a new branch &quot;serverfix&quot;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Pulling"><a href="#Pulling" class="headerlink" title="Pulling"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Pulling</span></h2><p>While fetch command will fetch all the changes on the server that you don’t have yet, it will not modify your working directory at all. It will simply get the data for you and let you merge it yourself. However, git pull= git fetch+git merge.</p>
+<h2 id="Deleting-Remote-Branches"><a href="#Deleting-Remote-Branches" class="headerlink" title="Deleting Remote Branches"></a><span style="color:INDIANRED; font-family: Comic Sans MS">Deleting Remote Branches</span></h2><p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin --delete serverfix</span><br></pre></td></tr></table></figure></p>
+<h1 id="Rebasing"><a href="#Rebasing" class="headerlink" title="Rebasing"></a><span style="color:INDIANRED; font-family: Goeriga">Rebasing</span></h1><h2 id="The-Basic-Rebase"><a href="#The-Basic-Rebase" class="headerlink" title="The Basic Rebase"></a><span style="color:INDIANRED; font-family: Comic Sans MS">The Basic Rebase</span></h2><p>In Git, there are two main ways to integrate changes from one branch into another: the <code>merge</code> and the <code>rebase</code>. </p>
+<p>For merge, Git performs a three-way merge between the two latest branch snapshots and the most recent common ancestor of the two, creating a new snapshot.</p>
+<img src="/2019/12/03/Git-learning-2/11.png" alt="drawing" width="700" class="center">
+
+<img src="/2019/12/03/Git-learning-2/12.png" alt="drawing" width="700" class="center">
+
+<p>For rebase, Git takes the patch of the change that was introduced in C4 and reapply it on top of C3. With rebase, you can take all the changes that were committed on one branch and replay them on a different branch.</p>
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout experiment</span><br><span class="line">$ git rebase master</span><br></pre></td></tr></table></figure></p>
+<img src="/2019/12/03/Git-learning-2/13.png" alt="drawing" width="700" class="center">
+
+<p>Often you’ll do this to make sure your commits apply cleanly on a remote branch – perhaps in a project to which you’re trying to contribute but that you don’t maintain.</p>
+<h2 id="More-Interesting-Rebases"><a href="#More-Interesting-Rebases" class="headerlink" title="More Interesting Rebases"></a><span style="color:INDIANRED; font-family: Comic Sans MS">More Interesting Rebases</span></h2><img src="/2019/12/03/Git-learning-2/13.png" alt="drawing" width="700" class="center">
+
+<p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase --onto master server client</span><br></pre></td></tr></table></figure></p>
+<p>This basically says: take the <code>client</code> branch, figure out the patches since it diverged from the <code>server</code> branch, and replay these patches in the <code>client</code> branch as if it was based  directly off the <code>master</code> branch instead.</p>
+<img src="/2019/12/03/Git-learning-2/14.png" alt="drawing" width="700" class="center">
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Git/">#Git</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/12/08/1001-Term-Project/">1001 Term Project</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/12/03/Git-learning/">Git learning (1)</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Haoxue Li&nbsp;
+                ONLY SINGLE ONE IN NYC: <a href="https://github.com/Gilemore">Gilemore</a>
+      
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

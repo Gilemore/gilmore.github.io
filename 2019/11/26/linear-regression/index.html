@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Assumptions about linear regression - Gilmore&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+
+
+    <meta name="keywords" content="Regression">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Assumptions about linear regression">
+<meta property="og:url" content="http://yoursite.com/2019/11/26/linear-regression/index.html">
+<meta property="og:site_name" content="Gilmore&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/11/26/linear-regression/1.jpg">
+<meta property="og:updated_time" content="2019-11-28T16:29:34.792Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Assumptions about linear regression">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/26/linear-regression/1.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-dune-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archives</a>
+            
+            <a class="navbar-item " href="/categories/LifeStyle">Lifestyle</a>
+            
+            <a class="navbar-item " href="/categories/Interviews">Interviews</a>
+            
+            <a class="navbar-item " href="/categories/Projects">Projects</a>
+            
+            <a class="navbar-item " href="/categories/Learning">Learning</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#linear-assumption">1&nbsp;&nbsp;<b>linear assumption</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Independent-errors">2&nbsp;&nbsp;<b>Independent errors</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Constant-variance-of-error-terms">3&nbsp;&nbsp;<b>Constant variance of error terms</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Collinearity">4&nbsp;&nbsp;<b>Collinearity</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Normality">5&nbsp;&nbsp;<b>Normality</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/Gilemore">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Assumptions about linear regression
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-11-26T15:07:16.000Z" itemprop="datePublished">Nov 26 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Interviews/">Interviews</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 minutes read (About 346 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="/2019/11/26/linear-regression/1.jpg" alt></p>
+<a id="more"></a>
+
+<h2 id="linear-assumption"><a href="#linear-assumption" class="headerlink" title="linear assumption"></a>linear assumption</h2><ul>
+<li><strong><em>Assumption:</em></strong> We assume that the response variable has a linear relationship with the predictors. </li>
+<li><strong><em>Consequences:</em></strong> prediction accuracy decreases dramatically </li>
+<li><strong><em>Detection:</em></strong> residual plot</li>
+<li><strong><em>Solution:</em></strong> log or square transformation</li>
+</ul>
+<h2 id="Independent-errors"><a href="#Independent-errors" class="headerlink" title="Independent errors"></a>Independent errors</h2><ul>
+<li><p><strong><em>Assumption:</em></strong> we assume that each error term is independent.</p>
+</li>
+<li><p><strong><em>Consequence:</em></strong> variance of errors $\sum (y_i-\hat{y_i})$ are overestimated. Then we overestimate the standard error of coefficients and fitted values. Thus confidence intervals will be wider, which will lead us to errorneously conclude that the parameter is statistically significant. </p>
+<p><strong>Summary</strong>: if errors are related, we will have an unwarranted sense of confidence interval in our model.</p>
+</li>
+<li><p><strong><em>Detection:</em></strong> residual plot (see wether adjacent residual is highly related)</p>
+</li>
+<li><p><strong><em>Solution:</em></strong> time series</p>
+</li>
+</ul>
+<h2 id="Constant-variance-of-error-terms"><a href="#Constant-variance-of-error-terms" class="headerlink" title="Constant variance of error terms"></a>Constant variance of error terms</h2><ul>
+<li><strong><em>Assumption:</em></strong> the variance of error terms are constant.</li>
+<li><strong><em>Consequence:</em></strong> variance of residuals can not be estimated since they are different. So we won’t have standard error of coefficients and fitted values, thus we won’t have confidence intervals and can not do hypothesis testing. </li>
+<li><strong><em>Detection:</em></strong> residual plot (funnal shape or not)</li>
+<li><strong><em>Solution:</em></strong> <ul>
+<li>concave function to transform, e.g. $log Y$, $\sqrt{Y}$, such transformation results in a greater amount of shrinkage of the larger response, leading to reduction in heteroscedasticity.</li>
+<li>weighted linear regression if we have a good idea of the variance of each response.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Collinearity"><a href="#Collinearity" class="headerlink" title="Collinearity"></a>Collinearity</h2><ul>
+<li><strong><em>Assumption:</em></strong>  predictors are not correlated.</li>
+<li><strong><em>Consequence:</em></strong> For the same value of objective function, we have a broader range of values for coefficients, that is the standard error of coefficients will grow. Thus it will result in a great deal of uncertainty in the coefficient estimates.  We will have a larger p-value and smaller t-statistics. In this way, we may lower the probability of correctly detecting a non-zero coefficient, that is, the significant parameter may be seen as non-significant.</li>
+<li><strong><em>Detection:</em></strong><ul>
+<li>Collinearity: correlation matrix</li>
+<li>Multicollinearity: VIF (variance inflation factor), how much variance of a predictor will is inflated due to multicollinearity in predictors</li>
+</ul>
+</li>
+<li>Solution: drop one of problematic predictors; ridge regression; principle component analysis</li>
+</ul>
+<h2 id="Normality"><a href="#Normality" class="headerlink" title="Normality"></a>Normality</h2><ul>
+<li><strong><em>Assumption:</em></strong> the error terms follow Gaussian distribution</li>
+<li><strong><em>Consequence:</em></strong> confidence intervals not conveniently calculated.</li>
+</ul>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Regression/">#Regression</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/11/26/Conversion-rate/">Conversion rate</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-next">
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Haoxue Li&nbsp;
+                ONLY SINGLE ONE IN NYC: <a href="https://github.com/Gilemore">Gilemore</a>
+      
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

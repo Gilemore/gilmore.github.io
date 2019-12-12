@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Regression splines - Gilmore&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+
+
+    <meta name="keywords" content="Regression">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Regression splines">
+<meta property="og:url" content="http://yoursite.com/2019/11/26/Regression-splines/index.html">
+<meta property="og:site_name" content="Gilmore&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/11/26/Regression-splines/1.jpg">
+<meta property="og:updated_time" content="2019-11-28T16:29:24.830Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Regression splines">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/26/Regression-splines/1.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-dune-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archives</a>
+            
+            <a class="navbar-item " href="/categories/LifeStyle">Lifestyle</a>
+            
+            <a class="navbar-item " href="/categories/Interviews">Interviews</a>
+            
+            <a class="navbar-item " href="/categories/Projects">Projects</a>
+            
+            <a class="navbar-item " href="/categories/Learning">Learning</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Polynomial-Regression">1&nbsp;&nbsp;<b>Polynomial Regression</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#What-is-polynomical-regression">1.1&nbsp;&nbsp;What is polynomical regression?</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Detail">1.2&nbsp;&nbsp;Detail</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Pros-and-Cons">1.3&nbsp;&nbsp;Pros and Cons:</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Step-Functions">2&nbsp;&nbsp;<b>Step Functions</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#what">2.1&nbsp;&nbsp;what?</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Detail-1">2.2&nbsp;&nbsp;Detail</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Pros-and-Cons-1">2.3&nbsp;&nbsp;Pros and Cons</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Regression-Splines">3&nbsp;&nbsp;<b>Regression Splines</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#what-1">3.1&nbsp;&nbsp;what?</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Details">3.2&nbsp;&nbsp;Details</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Pros-and-Cons-2">3.3&nbsp;&nbsp;Pros and Cons</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Smoothing-Splines">4&nbsp;&nbsp;<b>Smoothing Splines</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#What">4.1&nbsp;&nbsp;What?</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Details-1">4.2&nbsp;&nbsp;Details</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Difference">4.3&nbsp;&nbsp;Difference</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/Gilemore">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Regression splines
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-11-26T18:02:35.000Z" itemprop="datePublished">Nov 26 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Interviews/">Interviews</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 minutes read (About 645 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="/2019/11/26/Regression-splines/1.jpg" alt></p>
+<a id="more"></a>
+
+<h1 id="Polynomial-Regression"><a href="#Polynomial-Regression" class="headerlink" title="Polynomial Regression"></a>Polynomial Regression</h1><h2 id="What-is-polynomical-regression"><a href="#What-is-polynomical-regression" class="headerlink" title="What is polynomical regression?"></a>What is polynomical regression?</h2><p>We replace the standard linear model with a polynomial function.</p>
+<h2 id="Detail"><a href="#Detail" class="headerlink" title="Detail"></a>Detail</h2><p>$y_i=\beta_0+\beta_1x_1+\beta_2x_2+\epsilon_i$</p>
+<p>When you try to use <code>sklearn.preprocessing.PolynomialFeatures</code>, that is what we get:</p>
+<p>$y_i=\beta_0+\beta_1x_1+\beta_2x_1^2+\beta_3x_2+\beta_4x_2^2+\beta_5x_1x_2$</p>
+<h2 id="Pros-and-Cons"><a href="#Pros-and-Cons" class="headerlink" title="Pros and Cons:"></a>Pros and Cons:</h2><ul>
+<li>(+) have a non-linear shape</li>
+<li>(-) impose a <em>global</em> structure on the non-linear function of $X$.</li>
+</ul>
+<h1 id="Step-Functions"><a href="#Step-Functions" class="headerlink" title="Step Functions"></a>Step Functions</h1><h2 id="what"><a href="#what" class="headerlink" title="what?"></a>what?</h2><p>For one feature, we break the range of this feature into <em>bins</em>, and fit a different constant in each bin. This is just equal to converting a continuous variable into an <em>ordered categorical</em>.</p>
+<h2 id="Detail-1"><a href="#Detail-1" class="headerlink" title="Detail"></a>Detail</h2><p>we create cutpoints $c_1,c_2,…c_K$ in the range of $X$ and then construct $K+1$ new variables:</p>
+<p>$C_0(X)=I(X&lt;c_1)$</p>
+<p>$C_1(X)=I(c_1\leq X &lt;c_2)$</p>
+<p>….</p>
+<p>$C_K(X)=I(c_K\leq X)$</p>
+<p>then we will have :</p>
+<p>$y_i=\beta_0+\beta_1C_1(x_i)+\beta_2C_2(x_i)+…+\beta_KC_K(x_i)+\epsilon_i$</p>
+<h2 id="Pros-and-Cons-1"><a href="#Pros-and-Cons-1" class="headerlink" title="Pros and Cons"></a>Pros and Cons</h2><ul>
+<li>(+) not impose non-linear structure</li>
+<li>(-) missing some increasing trend</li>
+</ul>
+<h1 id="Regression-Splines"><a href="#Regression-Splines" class="headerlink" title="Regression Splines"></a>Regression Splines</h1><h2 id="what-1"><a href="#what-1" class="headerlink" title="what?"></a>what?</h2><p>specifying a set of knots, producing a sequence of basis functions, and then using least squares to estimate the spline coefficients.</p>
+<p>regression spline is a flexible class of basis functions.   It extends polynomial regression and piecewise constant regression with some continuities.</p>
+<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><ul>
+<li>Polynomial regression and piecewise constant regression</li>
+</ul>
+<p>Instead of fitting a high-degree polynomial over the entire range of $X$, <em>piecewise</em> polynomial regression involves fitting separate low-degree polynomials over different regions of $X$.</p>
+<p>e.g. $y_i=\beta_{01}+\beta_{11}x_i+\beta_{21}x_i^2+\beta_{31}x_i^3+\epsilon_i$, if $x_i&lt;c$</p>
+<p>$y_i=\beta_{02}+\beta_{12}x_i+\beta_{22}x_i^2+\beta_{32}x_i^3+\epsilon_i$, if $x_i\geq c$</p>
+<ul>
+<li>Constraints and Splines</li>
+</ul>
+<p>for cubic splines ($x,x^2,x^3$), we add constraints: continuity, continuity of the first derivative, continuity of the second derivative.</p>
+<p>for linear splines ($x$), we add constraints: continuity.</p>
+<ul>
+<li>boundaries</li>
+</ul>
+<p>Splines can have high variance at the outer range of predictors. So a <em>natural spline</em> is a regression spline with additional <em>boundary constraints</em>: the function is required to be linear at the boundary (in the region where $X$ is smaller than the smallest knot, or larger than the largest knot).</p>
+<ul>
+<li>choose locations and number of knots</li>
+</ul>
+<p>place more knots in places where we feel the function might vary most rapidly and fewer knots where it seems more stable. but in practice, we just place the corresponding number of knots at unform quantiles of the data, e.g. 25th, 50th, 75th.</p>
+<p>choose the number using cross-validation.</p>
+<h2 id="Pros-and-Cons-2"><a href="#Pros-and-Cons-2" class="headerlink" title="Pros and Cons"></a>Pros and Cons</h2><ul>
+<li>(+) Introduce flexibility by increasing the number of knots but keeping the degree fixed. more stable.</li>
+<li>(+) place more knots, so more knots where $f$ seems to be changing rapidly, fewer knots where $f$ appears more stable</li>
+</ul>
+<h1 id="Smoothing-Splines"><a href="#Smoothing-Splines" class="headerlink" title="Smoothing Splines"></a>Smoothing Splines</h1><h2 id="What"><a href="#What" class="headerlink" title="What?"></a>What?</h2><p>We add a penalty term for smoothness in the objective function, find the function $g$ that minimizes the new objective function and that is <em>smoothing spline</em>.</p>
+<h2 id="Details-1"><a href="#Details-1" class="headerlink" title="Details"></a>Details</h2><p>We want $RSS=\sum (y_i-\hat{y_i})^2$ to be small. If we don’t put any constraints on $g(x_i)$, then we can always make RSS zero simply by choosing $g$ that it <em>interpolates</em> all the $y_i$.</p>
+<p>so what we want is a function that makes RSS small but that is also <em>smooth</em>.</p>
+<p>$\sum (y_i-g(x_i))^2+\lambda\int g’’(t)^2dt$</p>
+<p>If $g$ is very smooth, then $g’(t)$ will be close to constant and $\int g’’(t)^2dt$ will take on a small value. </p>
+<p>If $g$ is jumpy and variable, then $g’(t)$ will vary significantly and $\int g’’(t)^2dt$ will take on a very large value.</p>
+<h2 id="Difference"><a href="#Difference" class="headerlink" title="Difference"></a>Difference</h2><p>a shrunken version of such a natural cubic spline, where the value of the tuning paramter $\lambda$ controls the level of shrinkage.</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Regression/">#Regression</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/11/26/object-oriented-programming/">object-oriented programming</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/11/26/Tree/">Tree</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Haoxue Li&nbsp;
+                ONLY SINGLE ONE IN NYC: <a href="https://github.com/Gilemore">Gilemore</a>
+      
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>QAnet - Gilmore&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+
+
+    <meta name="keywords" content="NLP-HW5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QAnet">
+<meta property="og:url" content="http://yoursite.com/2019/11/30/QAnet/index.html">
+<meta property="og:site_name" content="Gilmore&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/11/30/QAnet/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/11/30/QAnet/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/30/QAnet/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/30/QAnet/4.jpg">
+<meta property="og:updated_time" content="2019-11-30T21:06:42.404Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QAnet">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/30/QAnet/1.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-dune-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archives</a>
+            
+            <a class="navbar-item " href="/categories/LifeStyle">Lifestyle</a>
+            
+            <a class="navbar-item " href="/categories/Interviews">Interviews</a>
+            
+            <a class="navbar-item " href="/categories/Projects">Projects</a>
+            
+            <a class="navbar-item " href="/categories/Learning">Learning</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Motivation">1&nbsp;&nbsp;<b>Motivation</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Comparison">2&nbsp;&nbsp;<b>Comparison</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Advantage">3&nbsp;&nbsp;<b>Advantage</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Detail">4&nbsp;&nbsp;<b>Detail</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#High-level">4.1&nbsp;&nbsp;High-level</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Input-Embedding-layer">4.1.1&nbsp;&nbsp;Input Embedding layer</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Embedding-Encoder-layer">4.2&nbsp;&nbsp;Embedding Encoder layer</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/Gilemore">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            QAnet
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-11-30T17:43:59.000Z" itemprop="datePublished">Nov 30 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Projects/">Projects</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 minutes read (About 996 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="/2019/11/30/QAnet/1.jpg" alt></p>
+<a id="more"></a>
+
+<p>RNNs with attention –&gt; convolution and self-attention</p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>RNNs with attention are often <strong><em>slow</em></strong> for both training and inference due to the sequential nature of RNNS. </p>
+<p>So QANet: encoder consists exclusively of <strong><em>convolution and self-attention</em></strong>, where <strong><em>convolution models local interactions</em></strong> (captures the local structure of text) <strong><em>and self-attention models global interactions</em></strong>. (between each pair of words)  Hence we can speed up and train more data. </p>
+<h1 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h1><p><img src="/2019/11/30/QAnet/2.png" alt="BiDAF"></p>
+<p><img src="/2019/11/30/QAnet/3.png" alt="QANet"></p>
+<p>The main difference is that QANet user convolutions and self-attentions as the building blocks of encoders that separately encodes the query and context. </p>
+<h1 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h1><ul>
+<li>efficient reading comprehension model using <strong><em>convolution and self-attention</em></strong> as building encoder blocks</li>
+<li>higher accuracy with <strong><em>novel data augmentation</em></strong> to enrich the trianing data by paraphrasing. </li>
+</ul>
+<h1 id="Detail"><a href="#Detail" class="headerlink" title="Detail"></a>Detail</h1><p>context paragraph: $C={c_1,c_2,…c_n}$ and query (question) sentence: $Q={q_1,q_2,…,q_m}$. Output a span $S={c_i,c_{i+1},…,c_{i+j}}$</p>
+<h2 id="High-level"><a href="#High-level" class="headerlink" title="High-level"></a>High-level</h2><p>five major components:</p>
+<ul>
+<li>embedding layer (fixed word embedding + character embedding)</li>
+<li>embedding encoder layer <strong><em>(convolution+self-attention)</em></strong></li>
+<li>Context-query attention layer</li>
+<li>model encoder layer <strong><em>(convolution+self-attention)</em></strong></li>
+<li>output layer</li>
+</ul>
+<h3 id="Input-Embedding-layer"><a href="#Input-Embedding-layer" class="headerlink" title="Input Embedding layer"></a>Input Embedding layer</h3><p>Include word embedding (GLOVE) and character embedding (Char-CNN)</p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Embedding</span><span class="hljs-params">(nn.Module)</span>:</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">    super().__init__()</span><br><span class="line">    self.conv2d=DepthwiseSeparableConv(d_char,d_char,<span class="hljs-number">5</span>,dim=<span class="hljs-number">2</span>)</span><br><span class="line">    self.high=Highway(<span class="hljs-number">2</span>,d_word+d_char)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self,ch_emb,wd_emb)</span>:</span></span><br><span class="line">      <span class="hljs-comment"># ch_emb: charactering embedding -- conv2d</span></span><br><span class="line">      <span class="hljs-comment"># wd_emb: word embedding</span></span><br><span class="line">      <span class="hljs-comment"># emb: highway([ch_emb, wd_emb])</span></span><br><span class="line">      ch_emb=ch_emb.permute(<span class="hljs-number">0</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)</span><br><span class="line">      ch_emb=F.dropout(ch_emb,p=dropout_char,training=self.training)</span><br><span class="line">      ch_emb=self.conv2d(ch_emb)</span><br><span class="line">      ch_emb,_=torch.max(ch_emb,dim=<span class="hljs-number">3</span>)</span><br><span class="line">      ch_emb=ch_emb.squeeze()</span><br><span class="line">      wd_emb=F.dropout(wd_emb,p=dropout,traing=self.training)</span><br><span class="line">      emb=torch.cat([ch_emb,wd_emb],dim=<span class="hljs-number">1</span>)</span><br><span class="line">      emb=self.high(emb)</span><br><span class="line">      <span class="hljs-keyword">return</span> emb</span><br></pre></td></tr></table></figure></p>
+<p>CNN class:</p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DepthwiseSeparableConv</span><span class="hljs-params">(nn.Module)</span>:</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self,in_ch,out_ch,k,dim=<span class="hljs-number">1</span>,bias=True)</span>:</span></span><br><span class="line">    super().__init__()</span><br><span class="line">    <span class="hljs-keyword">if</span> dim==<span class="hljs-number">1</span>:</span><br><span class="line">      <span class="hljs-comment"># nn.Conv1d: applies a 1D convolution over an input signal composed of several input planes</span></span><br><span class="line">      self.depthwise_conv=nn.Conv1d(in_ch,in_ch,k,in_ch,k//<span class="hljs-number">2</span>,bias)</span><br><span class="line">self.pointwise_conv=nn.Conv1d(in_ch,out_ch,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,bias)</span><br><span class="line"><span class="hljs-keyword">elif</span> dim==<span class="hljs-number">2</span>:</span><br><span class="line">  self.depthwise_conv=nn.Conv2d(in_ch,in_ch,k,in_ch,k//<span class="hljs-number">2</span>,bias)</span><br><span class="line">  self.pointwise_conv=nn.Conv2d(in_ch,in_ch,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,bias)</span><br><span class="line">  <span class="hljs-keyword">else</span>:</span><br><span class="line">    <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">"Wrong dimension for Depthwise Separable Convolution!"</span>)</span><br><span class="line">  nn.init.kaiming_normal_(self.depthwise_conv.weight)</span><br><span class="line">  nn.init.kaiming_normal_(self.depthwise_conv.weight)</span><br><span class="line">        nn.init.constant_(self.depthwise_conv.bias, <span class="hljs-number">0.0</span>)</span><br><span class="line">        nn.init.kaiming_normal_(self.depthwise_conv.weight)</span><br><span class="line">        nn.init.constant_(self.pointwise_conv.bias, <span class="hljs-number">0.0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span><span class="hljs-params">(self, x)</span>:</span></span><br><span class="line">        <span class="hljs-keyword">return</span> self.pointwise_conv(self.depthwise_conv(x))</span><br></pre></td></tr></table></figure></p>
+<h4 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h4><p>convolution is a mathematial operation on two functions $f$ and $g$ that produces a third function expressing how the shape of one is modified by the other. it is defined as the intergral of the product of the two functions after one is reversed and shifted. </p>
+<ul>
+<li>$(f*g)(t)=\int_{\infty}^{\infty}f(\gamma)g(t-\gamma)d\gamma$</li>
+</ul>
+<p>Here $t$ needs not representation the time domain. The convolution formula can be described as a weighted average of the function $f(\gamma)$ at the moment $\gamma$ where the weighting is given by $g(-\gamma)$ simply shifted by amount $t$. as $t$ changes, the weighting function emphasizes different parts of the input function.</p>
+<h4 id="Convolutional-Neural-Networks"><a href="#Convolutional-Neural-Networks" class="headerlink" title="Convolutional Neural Networks"></a>Convolutional Neural Networks</h4><p>Convolutional neural network is a specialized type of neural network model designed for working with <strong><em>two-dimensional image data</em></strong>.</p>
+<p>Central to the convolutional neural network is the convolutional layer that gives the network its name.  This layer performs an operation called a “<em>convolution</em>“.</p>
+<p>convolution is a linear operation that involves the multiplication of a set of weights with the input, much like a traditional neural network. the multiplication is performed between an array of input data and a two-dimensional array of weights, called a filter or a kernel: input <em>#dot product#</em> filter=single value.</p>
+<p>using a filter smaller than the input is intentional as it allows the same filter (set of weights) to be multiplied by the input array multiple times at different points on the input.</p>
+<p>using a filter (filter size) smaller than the input (input length) is intentional as it allows the same filter to be multiplied by the input array multiple times at different points on the input. Specifically, the filter is applied systematically to each overlapping part or filter-sized patch of the input data, left to right, top to bottom.</p>
+<p>The output from multiplying the filter with the input array one time is a single value. as the filter is applied multiple times to the input array, the result is two-dimensional array output values that represent a filtering of the input. As such, the two-dimensional output array from this operation is called <span style="color:grey; font-family:fantasy"> feature space</span></p>
+<p><span style="color:pink; font-family:Papyrus">channels:</span></p>
+<p>color images have multiple channels, typically one for each color channel, such as green, red and blue. That is, a single image provided as input to the model is three images.</p>
+<h4 id="Example-of-1D-Convolutional-Layer"><a href="#Example-of-1D-Convolutional-Layer" class="headerlink" title="Example of 1D Convolutional Layer"></a>Example of 1D Convolutional Layer</h4><p>Input: $(N,C_{in},L)$</p>
+<p>where $N$ is a <span style="color:pink">batch size</span>, $C$ denotes <span style="color:pink">a number of channels</span>, $L$ is <span style="color:pink">the length of signal sequence</span>.</p>
+<p>So here we have channels=2, the length of signal sequence=5, batch=2.</p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input=torch.ones(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>)</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn</span><br><span class="line">m=nn.Conv1d(in_channels=<span class="hljs-number">2</span>,out_channels=<span class="hljs-number">1</span>,kernel_size=<span class="hljs-number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<p>$out(N_i, C_{out_j}) = bias(C_{out_j}) +        \sum_{k = 0}^{C_{in} - 1} weight(C_{out_j}, k)        \star input(N_i, k)$</p>
+<p>In $ith$ batch, $jth$ output channel equals: </p>
+<p>$k=0$ Indicates that we use the filter (set of weights) to be multiplied by the input array for the first time.</p>
+<p>$k=1$ Indicates that we use the filter (set of weights) to be multiplied by the input array for the secod time.</p>
+<p>…</p>
+<p>until $k=$input sequence length- kernel size</p>
+<p><img src="/2019/11/30/QAnet/4.jpg" alt="Feature map"></p>
+<h2 id="Embedding-Encoder-layer"><a href="#Embedding-Encoder-layer" class="headerlink" title="Embedding Encoder layer"></a>Embedding Encoder layer</h2><p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class EncoderBlock(nn.Module):</span><br></pre></td></tr></table></figure></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/NLP-HW5/">#NLP-HW5</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/11/30/4.jpgl/"></a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/11/28/Local-Regression/">Local Regression and GAMs</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Haoxue Li&nbsp;
+                ONLY SINGLE ONE IN NYC: <a href="https://github.com/Gilemore">Gilemore</a>
+      
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

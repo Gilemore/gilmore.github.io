@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Git learning (1) - Gilmore&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Git learning (1)">
+<meta property="og:url" content="http://yoursite.com/2019/12/03/Git-learning/index.html">
+<meta property="og:site_name" content="Gilmore&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning/Local-VC.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning/CVS.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning/DVS.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning/Delta.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning/Git.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning/sections.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/03/Git-learning/file.png">
+<meta property="og:updated_time" content="2019-12-03T17:52:14.694Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git learning (1)">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/03/Git-learning/1.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-dune-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archives</a>
+            
+            <a class="navbar-item " href="/categories/LifeStyle">Lifestyle</a>
+            
+            <a class="navbar-item " href="/categories/Interviews">Interviews</a>
+            
+            <a class="navbar-item " href="/categories/Projects">Projects</a>
+            
+            <a class="navbar-item " href="/categories/Learning">Learning</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Recap">1&nbsp;&nbsp;<b>Recap</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Version-Control">2&nbsp;&nbsp;<b>Version Control</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Git-introduction">3&nbsp;&nbsp;<b>Git introduction</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Git-Basics">4&nbsp;&nbsp;<b>Git Basics</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Remote">5&nbsp;&nbsp;<b>Remote</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/Gilemore">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Git learning (1)
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-12-03T14:39:46.000Z" itemprop="datePublished">Dec 3 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Projects/">Projects</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 minutes read (About 1504 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="/2019/12/03/Git-learning/1.jpg" alt></p>
+<a id="more"></a>
+
+<h1 id="Recap"><a href="#Recap" class="headerlink" title="Recap"></a>Recap</h1><ul>
+<li>Version Control<ul>
+<li>Local VC</li>
+<li>Centralized VC</li>
+<li>Distributed VC (clone everything, including history)</li>
+</ul>
+</li>
+<li>Git<ul>
+<li>take a snapshot and store the reference </li>
+<li>store SHA-1 hash to represent file</li>
+<li>modified, staged (<strong>mark</strong> a modified file to go into your next commit!) commit</li>
+</ul>
+</li>
+<li>Three working sections<ul>
+<li>working directory</li>
+<li>Staging area</li>
+<li>.git repository</li>
+</ul>
+</li>
+<li>Git basics<ul>
+<li>git init</li>
+<li>git clone</li>
+<li>git add (add precisely this content to the commit)</li>
+<li>git diff (detail changes in not staged)</li>
+<li>git commit</li>
+<li>git rm “…” then git commit</li>
+</ul>
+</li>
+<li>Remote<ul>
+<li>git remote (origin: default name Git gives to the server you cloned from)</li>
+<li>git remote add new https://….. (add remote repository)</li>
+<li>git fetch origin</li>
+<li>git </li>
+</ul>
+</li>
+</ul>
+<p>In one git repository, we have tracked files and untracked files. For tracked files, it can have modified, staged (<strong>mark</strong> a modified file to go into your next commit!) and commited status.</p>
+<h1 id="Version-Control"><a href="#Version-Control" class="headerlink" title="Version Control"></a>Version Control</h1><p>Version control is a <span style="color:LIGHTCORAL; font-family: Comic Sans MS">system </span>that <span style="color:LIGHTCORAL; font-family: Comic Sans MS">record changes </span>to a file or set of files over time so that you can call specific versions later.</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Local Version Control Systems </span></p>
+<img src="/2019/12/03/Git-learning/Local-VC.png" alt="drawing" class="center" width="500">
+
+<p>In this method, we just copy files into another directory. </p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Centralized Version Control Systems </span></p>
+<p>These systems have a single server that contains all the versioned files and a number of clients that checkout files files from that central place.</p>
+<img src="/2019/12/03/Git-learning/CVS.png" alt="drawing" width="500">
+
+<p>In this way, everyone knows to a certain degree what everyone else on the project is doing. Administrators have fine-grained control over who can do what. </p>
+<p>But the downsides are that if server goes down for an hour, then during that hour nobody can collaborate at all or save versioned changes to anything they’re working on. Easy to lose everything!!</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Distributed Version Control Systems </span></p>
+<p>In a DVCS (such as Git, Mercurial..), clients (me) do not just checkour the latest snapshot of the files. rather, we can <span style="color:LIGHTCORAL; font-family: Comic Sans MS"><strong>fully mirror the repository</strong></span>, including its full history.  Every clone is really a full backup of all the data.</p>
+<p>Furthermore, many of these systems deal with having several remote repositories (just like what we have in GitHub)!</p>
+<img src="/2019/12/03/Git-learning/DVS.png" alt="drawing" width="500" class="center">
+
+<h1 id="Git-introduction"><a href="#Git-introduction" class="headerlink" title="Git introduction"></a>Git introduction</h1><p><span style="color:INDIANRED; font-family: Comic Sans MS">Difference with other VCs </span></p>
+<p>The major difference between Git and any other VCs is the way Git thinks about data.</p>
+<p><span style="font-family: Courier">Delta-based version control: </span></p>
+<p>Most other systems store information (=make records) as a list of file-based changes. They think of the information they store as a set of files and the changes made to each file over time. </p>
+<img src="/2019/12/03/Git-learning/Delta.png" alt="drawing" width="700" class="center">
+
+<p><span style="font-family: Courier">Git: </span></p>
+<p>Git thinks of its data more like a series of snapshots of a miniature filesystem. With Git, every time you commit, or save the state of your project, Git takes a picture of what all your files look like at that moment and <span style="color:LIGHTCORAL; font-family: Comic Sans MS"><strong>store a reference to the snapshot</strong></span>. Not store the file, but a link to the previous identical file it has already stored.  </p>
+<img src="/2019/12/03/Git-learning/Git.png" alt="drawing" width="700" class="center">
+
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">SHA-1 hash</span></p>
+<p>Everything in Git is checksummed before it is stored and is then referred to by that checksum. This means it’s impossible to change the contents of any file or directory without Git knowing about it. The mechanism that Git uses for this checksumming is called a SHA-1 hash. 40-character string being calculated based on the contents of a file or directory structure in Git. </p>
+<p><code>24b9da6552252987aa493b52f8696cd6d3b00373</code></p>
+<p>Git stores everything in its database not by file name but by the hash value of its contents.</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Every action is to add data in Git</span></p>
+<p>you can lose or mess up changes you haven’t commited yet, but after you commit a snapshot into Git, it is very difficult to lose, especially if you regularly push your database to another repository.</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Three major states!</span></p>
+<ul>
+<li>Modified: you have changed the file but have not commited it to your database yet.</li>
+<li>Staged: you have marked a modified file in its current version to go into your next commit snapshot.</li>
+<li>Commited: data is safely stored in your local database.</li>
+</ul>
+<p>three main sections of a Git project:</p>
+<ul>
+<li>Working Directory: a single checkout of one version of the project. These files are pulled out of the compressed database in the Git directory and placed on disk for you to use or modify. (you write codes and do some analyzes in this section)</li>
+<li>Staging area (a file! that stores info about what will go into your next commit)</li>
+<li>Git directory (Git stores the metadata and object database for you project. it is what is copied when you clone a repository from another computer)</li>
+</ul>
+<img src="/2019/12/03/Git-learning/sections.png" alt="drawing" width="700" class="center">
+
+<h1 id="Git-Basics"><a href="#Git-Basics" class="headerlink" title="Git Basics"></a>Git Basics</h1><p><span style="color:INDIANRED; font-family: Comic Sans MS">Getting a Git Repository</span></p>
+<ol>
+<li>Take a local directory that is not under version control and turn it into a Git repository</li>
+<li>clone an existing Git repository from elsewhere</li>
+</ol>
+<p><code>git init</code></p>
+<p>This creates a new subdirectory named <code>.git</code> that contains all of your necessary repository files. (e.g. in /Classes/Project/Git, there is a <code>.git</code>) At this point, nothing in  your project is tracked yet.</p>
+<p><code>git clone https://github.com/libgit2/libgit2</code></p>
+<p>This creates a directory named <code>libgit2</code>, initializes a <code>.git</code> directory inside it, pulls down all the data for that repository, and checks out a working copy of the latest version. </p>
+<p><code>$ git clone https://github.com/libgit2/libgit2 mylibgit</code></p>
+<p>this just clone the repository into a directory named something other than libgit2.</p>
+<p><code>git clone git://github.com/libgit2/libgit2 mylibgit</code> or <code>git clone user@server:path/to/repo.git</code></p>
+<p>Use the SSH transfer protocol.</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Record changes to the repository</span></p>
+<p>Each file in your working directory can be in one of two states: <span style="color:LIGHTCORAL; font-family: Comic Sans MS">tracked</span> or <span style="color:LIGHTCORAL; font-family: Comic Sans MS">untracked</span>. Tracked tiles are files that were in the last snapshot: they can be unmodified, modified, or staged. (Git knows about!!) untracked are any files in your working directory that were not in your last snapshot and are not in your staging area.</p>
+<img src="/2019/12/03/Git-learning/file.png" alt="drawing" width="700" class="center">
+
+<p><code>git status</code> or <code>git status -s</code></p>
+<p>Untracked means that Git sees a file you didn’t have in the previous snapshot (commit).</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Tracking new files, Staging modified files</span></p>
+<p><code>git add README.md</code> or <code>git add 1011/data</code></p>
+<p>changes not staged for commit – means that a file that is tracked has been modified in the working directory but not yet staged. To stage it, you run the <code>git add</code>. So this command can track new files, stage files, and mark merge-conflicted as resolved. – <span style="color:LIGHTCORAL; font-family: Comic Sans MS">add precisely this content to the next commit</span>.</p>
+<p>Git stages a file exactly as it is when you run the <code>git add</code> command.</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Ignoring Files</span></p>
+<p>if you have a class of files that you  don’t want Git to automatically add or even show you as being untracked. you can create a file listing patters to match them named <code>.gitignore</code></p>
+<p><code>$cat .gitignore</code></p>
+<p><code>*.[oa]</code>  ignore any files ending in “.o” or “.a”</p>
+<p><code>*~</code> ignore all files whose names end with a ~</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Viewing your changes in detail</span></p>
+<p><code>git diff</code></p>
+<p>what have you changed but not yet staged? what have you staged that you are about to commit?</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Viewing your changes in detail</span></p>
+<p><code>git commit</code></p>
+<p><code>git commit -a -m &quot;add new benchmarks</code> this automatically stage every file that is already tracked before doing the commit, letting you skip the <code>git add</code> part.</p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Remove files</span></p>
+<p>if you just simply remove the file from your working directory, it shows up under the “Changes not staged for commit” (unstaged).</p>
+<p><code>git rm READMD.md</code></p>
+<p><code>git commit -m &quot;removal&quot;</code></p>
+<p>if you want to keep the file but remove it from your staging area (Git not track it):</p>
+<p><code>git rm --cached README</code></p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Rename files</span></p>
+<p><code>git mc file_from file_to</code></p>
+<h1 id="Remote"><a href="#Remote" class="headerlink" title="Remote"></a>Remote</h1><p>Remote repositories are versions of your project that are hosted on the Internet or network somewhere. This includes managing remote repositories includes knowing how to add, remove remotes that are no longer valid, manage various remote branches and define them as being tracked or two. </p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Show your remote</span></p>
+<p><code>git remote</code></p>
+<p>This lists the shortnames of each remote handle you’ve specified. If you’ve cloned your repository, you should at least see <code>origin</code>, that is the default name Git gives to the server you cloned from.</p>
+<p><code>git remote -v</code></p>
+<p>this specifies the URLs. </p>
+<p><span style="color:INDIANRED; font-family: Comic Sans MS">Adding Remote Repositories</span></p>
+<p><code>git remote add pb https://github.com/...</code></p>
+<p>Here pb is the new name you give to the remote repository.</p>
+<p><code>git fetch pb</code></p>
+<p>This can fetch (get) all the information that others has but that you don’t have in your repository. </p>
+<p>If you clone a repository, the command automatically adds that remote repository under the name “origin” .</p>
+<p><code>git pull</code></p>
+<p>If your current branch is set up to track a remote brand, you can use this command to automatically fetch and then merge that remote branch into your current branch.  This generally fetch data from the server you originally cloned from and automatically tries to merge it into the code you’re currently working on.</p>
+<p><code>git push &lt;remote&gt; &lt;branch&gt;</code></p>
+<p>This only works if you cloned form a server to which you have write access and if nobody has pushed in the meantime. If two people clone at the same time and they push upstream and then you push upstream, your push will rightly be rejected. You’ll have to fetch their work first and incorporate it into yours before you’ll be allowed to push.</p>
+
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/12/03/Git-learning-2/">Git learning (2)</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/11/30/4.jpgl/"></a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Haoxue Li&nbsp;
+                ONLY SINGLE ONE IN NYC: <a href="https://github.com/Gilemore">Gilemore</a>
+      
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

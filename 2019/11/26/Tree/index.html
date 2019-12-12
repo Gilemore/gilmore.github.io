@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Tree - Gilmore&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+
+
+
+
+    <meta name="keywords" content="Tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tree">
+<meta property="og:url" content="http://yoursite.com/2019/11/26/Tree/index.html">
+<meta property="og:site_name" content="Gilmore&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/11/26/Tree/1.jpg">
+<meta property="og:updated_time" content="2019-12-03T19:53:54.213Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tree">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/26/Tree/1.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-dune-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archives</a>
+            
+            <a class="navbar-item " href="/categories/LifeStyle">Lifestyle</a>
+            
+            <a class="navbar-item " href="/categories/Interviews">Interviews</a>
+            
+            <a class="navbar-item " href="/categories/Projects">Projects</a>
+            
+            <a class="navbar-item " href="/categories/Learning">Learning</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Decision-tree">1&nbsp;&nbsp;<b>Decision tree</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#What-is-a-decison-tree">1.1&nbsp;&nbsp;What is a decison tree?</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Details">1.2&nbsp;&nbsp;Details</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Greedy">1.3&nbsp;&nbsp;Greedy?</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Pruning">1.4&nbsp;&nbsp;Pruning</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Reduced-error-pruning">1.4.1&nbsp;&nbsp;Reduced error pruning</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Cost-complexity-pruning">1.4.2&nbsp;&nbsp;Cost complexity pruning</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Pros-and-Cons">1.5&nbsp;&nbsp;Pros and Cons</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Bagging">2&nbsp;&nbsp;<b>Bagging</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#What">2.1&nbsp;&nbsp;What?</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Out-of-bag-Estimation">2.2&nbsp;&nbsp;Out-of-bag Estimation</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Feature-Importance">2.3&nbsp;&nbsp;Feature Importance</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Random-Forests">2.4&nbsp;&nbsp;Random Forests</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#why-random-subset-of-predictors">2.4.1&nbsp;&nbsp;why random subset of predictors</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Out-of-Bag-Error">2.4.2&nbsp;&nbsp;Out-of-Bag Error</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Boosting">2.5&nbsp;&nbsp;Boosting</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Tuning-parameters">2.5.1&nbsp;&nbsp;Tuning parameters</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Gradient-boosting">2.5.2&nbsp;&nbsp;Gradient boosting</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/Gilemore">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Tree
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-11-26T16:19:53.000Z" itemprop="datePublished">Nov 26 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Interviews/">Interviews</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 minutes read (About 970 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><img src="/2019/11/26/Tree/1.jpg" alt></p>
+<a id="more"></a>
+
+<h1 id="Decision-tree"><a href="#Decision-tree" class="headerlink" title="Decision tree"></a>Decision tree</h1><h2 id="What-is-a-decison-tree"><a href="#What-is-a-decison-tree" class="headerlink" title="What is a decison tree?"></a>What is a decison tree?</h2><p><span style="color: #93341F; font-family: Georgia">Answer:</span></p>
+<p>We first build a tree and then make a decision. </p>
+<p>Tree: we segment the predictor space into a number of simple regions. Because the set of splitting rules can be summarized into a tree, so we use “tree” terminology.</p>
+<p>Decision: for a given observation, we dicide which region this observation belongs to and predict it with the mean or mode of this region.</p>
+<hr>
+<p>We stratify or segment the predictor space into a number of simple regions. Then for a given observation, we decide which region this observation belongs and predict it using the mean or mode of trianing data in this region. Since the set of splitting rules used to segment the predictor space can be summarized in a tree, so we call this method as a decision tree. </p>
+<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><p>We start with all the data. We try to find the best split variable and splitting point to minimize the objective function, for regression tree we can use residual of sum of squares, for classification tree we can use misclassification rate or information gain. </p>
+<p>After finding the best split, we partition the feature space into two regions. We repeat splitting in each region. We stop the splitting process only when some minimum node size is reached. </p>
+<p>Then this large tree is pruned using cost complextiy pruning.</p>
+<h2 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy?"></a>Greedy?</h2><p>It is computationally infeasible to consider every partition of feature spaces. So at each step of the tree build processing, the best split is made at that particular step, rather than looking ahead and pick a split that will lead to a better tree in some future step.</p>
+<h2 id="Pruning"><a href="#Pruning" class="headerlink" title="Pruning"></a>Pruning</h2><h3 id="Reduced-error-pruning"><a href="#Reduced-error-pruning" class="headerlink" title="Reduced error pruning"></a>Reduced error pruning</h3><p>Replace <strong>each node</strong> with its most popular class to see whether <strong>prediction accuracy is affected</strong>.</p>
+<h3 id="Cost-complexity-pruning"><a href="#Cost-complexity-pruning" class="headerlink" title="Cost complexity pruning"></a>Cost complexity pruning</h3><h4 id="detail"><a href="#detail" class="headerlink" title="detail"></a>detail</h4><ul>
+<li>starting from the original tree, generate a series of subtree by collapsing the internal nodes of previous tree, until the single-node root tree.</li>
+<li>we define the cost complexity criterion. we add a cost term in the objective function, this can find a balance between the size of tree and goodness of fit to the data. So the final tree is the one that minimize cost complexity in the series of trees.</li>
+<li>we use weakest link pruning in collapsing internal nodes: find the node that produces the smallest pre-node increase in errors to collapse.</li>
+</ul>
+<h4 id="Total-process"><a href="#Total-process" class="headerlink" title="Total process"></a>Total process</h4><ul>
+<li>Use recursive binary splitting to grow a large tree on the training data, stopping only when each terminal node has fewer than some minimum number of observations.</li>
+<li>Apply cost complexity pruning to the large tree in order to obtain a sequence of best subtrees as function of $\alpha$.</li>
+<li>Use k-fold cross-validation to choose $\alpha$, average the results for each value of $\alpha$ and pick the one to minimize the average error.</li>
+<li>Return the subtree from step 2 that corresponds to the chosen value of $\alpha$.</li>
+</ul>
+<h2 id="Pros-and-Cons"><a href="#Pros-and-Cons" class="headerlink" title="Pros and Cons"></a>Pros and Cons</h2><ul>
+<li>(+) easy to interpret</li>
+<li>(+) handle qualitative predictors without the need to create dummy variables</li>
+<li>(+) non-linear relationship</li>
+<li>(+) interactions between variables</li>
+<li>(-) non-robust: a slight change can result in a drastically different tree</li>
+<li>(-) lack of a principled framework: confidence intervals</li>
+<li>Un-correlated variables not good.</li>
+</ul>
+<h1 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h1><h2 id="What"><a href="#What" class="headerlink" title="What?"></a>What?</h2><p>use bootstrap to build multiple separate decision trees, and average their results to get the prediction.</p>
+<h2 id="Out-of-bag-Estimation"><a href="#Out-of-bag-Estimation" class="headerlink" title="Out-of-bag Estimation"></a>Out-of-bag Estimation</h2><p>On average, each bagged tree makes use of around two-thirds of the observations. The remaining one-third of the observations not used to fit the tree are out-of-bag observations.</p>
+<p>For each observation, we can predict its response using the trees in which this observation is out-of-bag. Then we average the predictions for each observation to get the final out-of-bag estimation.</p>
+<h2 id="Feature-Importance"><a href="#Feature-Importance" class="headerlink" title="Feature Importance"></a>Feature Importance</h2><p>Bagging regression trees: record the total amount that the residual sum of squares is decresed due to splits over a given predictor, then averaged over all trees.</p>
+<h2 id="Random-Forests"><a href="#Random-Forests" class="headerlink" title="Random Forests"></a>Random Forests</h2><h3 id="why-random-subset-of-predictors"><a href="#why-random-subset-of-predictors" class="headerlink" title="why random subset of predictors"></a>why random subset of predictors</h3><p>Suppose there is one strong predictors in the dataset, then most decision tree will use this strong predictor in the top split. Consequently, all the decison trees will look similar to each other. Hence the predictions from those decision trees will look similar and averageing many highly correlated quantities does not lead to a large reduction in variance. </p>
+<h3 id="Out-of-Bag-Error"><a href="#Out-of-Bag-Error" class="headerlink" title="Out-of-Bag Error"></a>Out-of-Bag Error</h3><p><span style="color: #93341F; font-family: Georgia">Answer:</span></p>
+<p>For each data point, since we use bootstrap to build each tree, there are some trees in which this data point is not included in the training set, in these trees we call this data point as out-of-bag observation. So we calculate its predictions in all these trees and average them as its final predictions. Then we can get the difference between the prediction and the  true value as out-of-bag error.</p>
+<hr>
+<p>for each data point, average its predictions on all bootstrap iterations in which data point was not sampled.</p>
+<h2 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h2><h3 id="Tuning-parameters"><a href="#Tuning-parameters" class="headerlink" title="Tuning parameters"></a>Tuning parameters</h3><ul>
+<li>the number of trees: may overfit</li>
+<li>the shrinkage parameter</li>
+<li>the number of spilts in each tree</li>
+</ul>
+<h3 id="Gradient-boosting"><a href="#Gradient-boosting" class="headerlink" title="Gradient boosting"></a>Gradient boosting</h3><h4 id="What-1"><a href="#What-1" class="headerlink" title="What?"></a>What?</h4><p><span style="color: #93341F; font-family: Georgia">Answer:</span></p>
+<p>We build decision trees sequentially. And the final tree is a weighted sum of decision trees.</p>
+<p>For each step, we fit a new decision tree to the gradient of loss function, that is, the residual of the cumulative prediction from all prior trees. Then we add this decision tree to all prior trees (update terminal regions in predictor space). We repeat this process until we reach the maximum number of trees. </p>
+<hr>
+<p>We want to minimize the loss function. So we user gradient descent to find the minimum. For each step, we try to build the decision tree to fit the gradient descent.</p>
+<h4 id="Details-1"><a href="#Details-1" class="headerlink" title="Details"></a>Details</h4><ul>
+<li>Initialize with a constant function, that is the average of all depedent values.</li>
+<li>then we build a decisiont tree to fit the gradient of loss function, that is the residual.</li>
+<li>add the tree to the ensemble</li>
+</ul>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Tree/">#Tree</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/11/26/Regression-splines/">Regression splines</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/11/26/Conversion-rate/">Conversion rate</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 Haoxue Li&nbsp;
+                ONLY SINGLE ONE IN NYC: <a href="https://github.com/Gilemore">Gilemore</a>
+      
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>
